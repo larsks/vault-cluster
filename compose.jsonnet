@@ -50,5 +50,5 @@ local vaultomatic = {
 
 {
   volumes: vault_volumes,
-  services: vault_nodes,
+  services: vault_nodes + vaultomatic,
 }
