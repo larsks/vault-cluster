@@ -31,6 +31,23 @@ local vault_volumes = {
   for k in std.objectFields(vault_nodes)
 };
 
+local vault_addrs = [
+  std.format('http://%s:8200', k)
+  for k in std.objectFields(vault_nodes)
+];
+
+local vaultomatic = {
+  vaultomatic: {
+    build: {
+      context: '.',
+      dockerfile: 'Containerfile',
+    },
+    environment: {
+      VAULT_ADDRS: std.join(' ', vault_addrs),
+    },
+  },
+};
+
 {
   volumes: vault_volumes,
   services: vault_nodes,
